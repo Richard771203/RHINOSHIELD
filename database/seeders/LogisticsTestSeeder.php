@@ -12,7 +12,7 @@ class LogisticsTestSeeder extends Seeder
      */
     public function run(LogisticsService $service): void
     {
-        // 1. 犀牛宅急便 (T-RHINO)
+        // 1. 犀牛宅急便 (T-RHINO) 第一筆
         $rhinoData = [
             "tracking_number" => "TRHINO20250101001",
             "time_zone" => "+09:00",
@@ -22,6 +22,17 @@ class LogisticsTestSeeder extends Seeder
             ]
         ];
         $service->updateTracking('T-RHINO', $rhinoData);
+
+        // 犀牛宅急便 測試第二筆貨態
+        $rhinoData1 = [
+            "tracking_number" => "TRHINO20250101002",
+            "time_zone" => "+09:00",
+            "delivery_records" => [
+                ["time" => "2025-02-21 08:00:00", "status_code" => "01", "location" => "台北營業所", "description" => "商品已收件"],
+                ["time" => "2025-02-22 10:30:00", "status_code" => "06", "location" => "台北轉運中心", "description" => "包裹退回"]
+            ]
+        ];
+        $service->updateTracking('T-RHINO', $rhinoData1);
 
         // 2. 台中貨運 (TCT)
         $tctData = [
